@@ -43,76 +43,96 @@ class Funcionario(Base):
 # primary_key = Chave primária. Chaves candidatas.
 # autoincrement = 
 
-#Exemplo:
-
-def criar_funcionario(nome, idade, cpf, setor, funcao, salario, telefone, novo_funcionario = Funcionario(
-        nome=nome, idade=idade, cpf=cpf, setor=setor, funcao=funcao
-)
-session.add(novo_funcionario)
-session.commit()
-
-def listar_todos_funcionararios():
-    funcionarios = session.query(Funcionario).all()
-    for func in funcionarios:
-        print(func)
-
-def salvar_funcionario():
-#   pass
-
-#   pass
-def atualizar_funcionario(funcionario):
-#   pass
-def excluir_funcionario(funcionario):
-#   pass 
-
-# TECNOLOGIAS
-""" 
-  - ORM: SQLAlchemy
-  - Banco de Dados: SQLite
-  - Versionamento: Git
-"""
-
-
-# Criando tabela no banco de dados.
-Base.metadata.create_all(bind=MEU_BANCO)
-
-# Salvar no Banco de Dados "commit = Salvar"
-os.system("cls || clear")
-
-# CREATE.
-print("Solicitando dados do usuário")
-inserir_nome = input("Digite seu Nome: ")
-inserir_idade = input("Digite sua Idade: ")
-inserir_cpf = input("Digite seu CPF: ")
-inserir_setor = input("Digite seu Setor: ")
-inserir_funcao = input("Digite sua Função: ")
-inserir_salario = input("Digite seu salário: ")
-inserir_telefone = input("Digite seu Telefone: ")
-
-usuario = Funcionario(nome="Maria", idade="457", cpf="456.212.332-23", setor="Mecanico", funcao="Técnico Mecânica", salario="3.456,45", telefone="71-999254458" )
-session.add(usuario)
-session.commit()
-
-# listando todos os usuários do Banco de Dados.
-print("\nExibindo todos usuários do banco de dados.")
-lista_usuarios = session.query(Funcionario).all()
-
-for usuario in lista_usuarios:
-    print(f"{usuario.nome} - {usuario.idade} - {usuario.cpf} - {usuario.setor} - {usuario.funcao} - {usuario.salario} - {usuario.telefone}")
-
-# Fechando conexão.
-session.close()
-
-# Resultado esperado:
-# Um sistema onde o usuário veja um menu e escolher dentre as opções disponíveis.
-
-print(
-"""      === RH System ===
-
-    1 - Adicionar funcionário
-    2 - Consultar um funcionário
-    3 - Atualizar os dados de um funcionário
-    4 - Excluir um funcionário
-    5 - Listar todos os funcionários
-    0 - Sair do sistema.
+    def menu():
+        while True:
+            print("""=== RH System ===
+            1 - Adicionar funcionário
+            2 - Consultar um funcionário
+            3 - Atualizar os dados de um funcionário
+            4 - Excluir um funcionário
+            5 - Listar todos os funcionários
+            0 - Sair do sistema.
 """)
+            opcao = input("Escolha uma opção: ")
+
+            if opcao = input == "1":
+              adicionar_funcionario()
+            elif opcao == "2":
+            consultar_funcionario()
+            elif opcao == "3":  
+            atualizar_funcionario()
+             elif opcao == "4":
+            excluir_funcionario()
+            elif opcao == "5"
+            listar_funcionario()
+            elif opcao == "0"
+                break
+            else:
+                print("Opção inválida! Tente novamente. ")
+
+
+    def adicionar_funcionario():
+        os.system("cls || clear")
+        print("Adicionando novo funcionário: ")
+        nome = input("Nome: ")
+        idade = int(input("Idade: "))
+        cpf = input("CPF: ")
+        setor = input("Setor: ")
+        funcao = input("Função: ")
+        salario = float(input("Salário: "))
+        telefone = input("Telefone: ")
+
+        funcionario = Funcionario(nome, idade, cpf, setor, funcao, salario, telefone)
+        session.add(funcionario)
+        print("Funcionario adicionado com Exito.")
+
+    def consultar_funcionario()
+        os.system("cls || clear")
+        cpf = input("Informe o CPF do funcionário: ")
+        funcionario = session.query(Funcionario).filter_by(cpf=cpf).first()
+        if funcionario:
+            print(f"Funcionário encontrado: {funcionario.idade}, Setor: {funcionario.setor}, Função: {funcionario.funcao}, Salário: {funcionario.salario}, Telefone: {funcionario.telefone}")
+        else:
+            print("Funcionário não encontrado.")
+    def atualizar_funcionario()
+        os.system("cls || clear")
+        cpf = input("Informe o CPF do funcionário que será atualizado: ")
+        funcionario = session.query(Funcionario).filter_by(cpf=cpf).first()
+        if funcionario:
+            funcionario.nome = input("Novo nome: ")
+            funcionario.idade = int(input("Novo setor: "))
+            funcionario.funcao = input("Nova Função: ")
+            funcionario.salario = float(input("Novo Salário: "))
+            funcionario.telefone = input("Novo Telefone: ")
+            session.commit()
+            print("Funcionário atualizado com sucesso. ")
+        else:
+            print("Funcionário não encontrado: ")
+
+    def excluir_funcionario()
+        os.system("cls || clear")
+        cpf=input("Informe o CPF do funcionário a ser excluído: ")
+        funcionario = session.query(Funcionario).filter_by(cpf=cpf).first()
+        if funcionario:
+                session.delete(funcionario)
+                session.commit()
+                print("Funcionário excluído com sucesso. ")
+        else:
+                print("Funcionário não encontrado. ")
+
+    def listar_funcionario()
+            os.system("cls || clear")
+            print("Lista de funcionários: ")
+            funcionario = session.query(Funcionario).all()
+            for funcionario in funcionario:
+                print(f"{funcionario.id} - {funcionario.nome} - {funcionario.idade} - {funcionario.cpf} - {funcionario.setor} - {funcionario.funcao} - {funcionario.salario} - {funcionario.telefone}")
+
+
+
+# CHAMANDO A FUNÇÃO
+
+    menu()
+
+# FECHANDO CONEXÃO
+
+    session.close()
